@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>About</title><url>/about/</url><categories/><tags/><content type="html">这是一个关于页面</content></entry><entry><title>预制菜行业背景</title><url>/post/food/%E9%A2%84%E5%88%B6%E8%8F%9C%E8%A1%8C%E4%B8%9A%E8%83%8C%E6%99%AF%E5%88%86%E6%9E%90/</url><categories><category>food</category></categories><tags><tag>行业分析</tag><tag>预制菜</tag></tags><content type="html"><![CDATA[概念 广义上预制菜是指对农、畜、禽、水产品等原料进行前期处理后，配以各种辅料，经预加工（如分切、搅拌、腌制、滚揉、成型、调味）后所制的成品或半成品。 按照生产工序，可以将预制菜分为净菜、半成品菜和成品菜三类；按照加工的深浅程度，可以按加工由深至浅的分为即食食品、即热食品、即烹食品、即配食品四类，狭义上理解预制菜指的是指即烹食品和即热食品。 行业分析 （1）政策环境 预制菜行业政策的主要方向是食品安全、营养结构、食品加工技术和物流数据化，国家对于食品加工行业的关注度非常高，出台了一些列食品加工业政策，营造食品工业良好环境，有助于加强预制菜行业发展，主要体现在：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>About</title><url>/about/</url><categories/><tags/><content type="html">这是一个关于页面</content></entry><entry><title>预制菜行业背景</title><url>/post/food/%E9%A2%84%E5%88%B6%E8%8F%9C%E8%A1%8C%E4%B8%9A%E8%83%8C%E6%99%AF%E5%88%86%E6%9E%90/</url><categories><category>餐饮</category></categories><tags><tag>行业分析</tag><tag>预制菜</tag></tags><content type="html"><![CDATA[概念 广义上预制菜是指对农、畜、禽、水产品等原料进行前期处理后，配以各种辅料，经预加工（如分切、搅拌、腌制、滚揉、成型、调味）后所制的成品或半成品。 按照生产工序，可以将预制菜分为净菜、半成品菜和成品菜三类；按照加工的深浅程度，可以按加工由深至浅的分为即食食品、即热食品、即烹食品、即配食品四类，狭义上理解预制菜指的是指即烹食品和即热食品。 行业分析 （1）政策环境 预制菜行业政策的主要方向是食品安全、营养结构、食品加工技术和物流数据化，国家对于食品加工行业的关注度非常高，出台了一些列食品加工业政策，营造食品工业良好环境，有助于加强预制菜行业发展，主要体现在：
 一是对行业内审批工作作出规范化建议、有利于行业内各企业的规范化发展;
 二是针对食品安全作出规范，保障营养结构;
 三是对科技技术发展支持，提升物流数据化进程，形成可追溯的冷链物流网络;
@@ -52,4 +52,262 @@
 2）针对各渠道的特点设计对应的营销打法，提升复购率及品牌知名度，助推品牌力建设；
 3）敏锐洞察市场需求风向，及时发掘适销对路的大单品
 总结：C 端竞争壁垒：渠道力和品牌力的竞争
-]]></content></entry></search>
+]]></content></entry><entry><title>跨域请求的jsonp处理</title><url>/post/web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/</url><categories><category>Web</category></categories><tags><tag>web</tag><tag>http</tag></tags><content type="html"><![CDATA[跨域简介 跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。
+浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；
+JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替
+处理步骤
+客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo &lsquo;doResponse($json)&rsquo;; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js:
+function doResponse(resp){ console.log(resp); for(var i in resp){ console.log(i); } } $(&#34;#btn&#34;).click(function() { /*动态追加script元素*/ $(&#34;body&#34;).append(`&lt;script src=&#34;http://127.0.0.1/jsonp.php?callback=doResponse&#34;&gt;&lt;\/script&gt;`); }); 也可以采用ajax获得返回数据
+$.getJSON(&#34;https://www.haohome.top/demo/jsonp.php?callback=doResponse&#34;,data=&gt;{ console.log(data); }); $.ajax({ type:&#34;GET&#34;, url:&#34;https://www.haohome.top/demo/jsonp.php?callback=doResponse&#34;, success:data=&gt;{ console.log(&#34;返回数据&#34;,data); }, dataType:&#34;jsonp&#34; })	服务器端php:
+header(&#34;Content-type:application/javascript;charset:utf-8&#34;); $getData=$_GET[&#39;callback&#39;]; $hello=json_encode([1,2,3,4]); echo $getData.&#34;(&#39;$hello&#39;)&#34;; ​
+]]></content></entry><entry><title>浏览器缓存问题</title><url>/post/web/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/</url><categories><category>Web</category></categories><tags><tag>Http</tag></tags><content type="html">请求缓存的路线图:
+两个概念 强缓存 用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。
+协商缓存 用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。
+共同点: 客户端获得的数据最后都是从客户端缓存中获得
+区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。
+四个过程详解 （a）浏览器判定是否有缓存 所谓“客户端缓存”就是指用户设备中本地资源。不同浏览器缓存文件的地址也不尽相同。
+对于一个html页面，缓存分3部分，一个是页面内容，一个是css样式，一个是JS文件
+我们以chrome为例来查看下浏览器缓存文件的地址， 1）首先在chrome中输入：chrome://chrome-urls/，看到一堆列表,里面隐藏了许多浏览器的奥秘，有兴趣的可以自己深扒。 2）找到 chrome://cache（当然也可以直接输入这个地址）
+（b）缓存是否过期 expires Http1.0 中的标准，表明过期时间，注意此处的时间都是指的是服务器的时间。
+存在的问题：服务器时间与客户端时间的不一致，就会导致缓存跟期待效果出现偏差。
+Cache-Control Http1.1 中的标准，可以看成是 expires 的补充。使用的是相对时间的概念。 Cache-Control的属性:
+1）max-age: 设置缓存的最大的有效时间，单位为秒（s）。max-age会覆盖掉Expires
+s-maxage: 只用于共享缓存，比如CDN缓存（s -&amp;gt; share）。与max-age 的区别是：max-age用于普通缓存， 而s-maxage用于代理缓存。如果存在s-maxage,则会覆盖max-age 和 Expires.
+public：响应会被缓存，并且在多用户间共享。默认是public。
+private: 响应只作为私有的缓存，不能在用户间共享。如果要求HTTP认证，响应会自动设置为private。
+5）no-cache: 指定不缓存响应，表明资源不进行缓存。但是设置了no-cache之后并不代表浏览器不缓存，而是在缓存前要向服务器确认资源是否被更改。因此有的时候只设置no-cache防止缓存还是不够保险，还可以加上private指令，将过期时间设为过去的时间。
+6）no-store: 绝对禁止缓存。
+7）must-revalidate: 如果页面过期，则去服务器进行获取。
+所以判断缓存是否过期步骤是： 1） 查看是否有cache-control 的max-age / s-maxage , 如果有，则用服务器时间date值 + max-age/s-maxage 的秒数计算出新的过期时间，将当前时间与过期时间进行比较，判断是否过期 2）查看是否有cache-control 的max-age / s-maxage，则用expires 作为过期时间比较
+总结：（b）过程执行完后，如果判定为未过期，则使用客户端缓存。那么就是属于“强缓存”。
+（c）跟服务器协商是否使用缓存 到这一步的时候，浏览器会向服务器发送请求，同时如果上一次的缓存中有Last-modified 和 Etag 字段， 浏览器将在request header 中加入If-Modified-Since（对应于Last-modified）， 和If-None-Match（对应于Etag）。
+Last-modified: 表明请求的资源上次的修改时间。
+If-Modified-Since：客户端保留的资源上次的修改时间。
+Etag：资源的内容标识。（不唯一，通常为文件的md5或者一段hash值，只要保证写入和验证时的方法一致即可）
+If-None-Match： 客户端保留的资源内容标识。
+1） 分布式系统尽量关闭Etag，因为每台机器生成的Etag都不一样。 2）分布式系统里多台机器间文件的Last-Modified必须一致，以免负载均衡不同导致对比失败。
+通常情况下，如果同时发送 If-None-Match 、If-Modified-Since字段，服务器只要比较etag 的内容即可，当然具体处理方式，看服务器的约定规则。
+（d）协商缓存 在这个阶段，服务器一般会将Cache-control、expires 、last-modified、date、etag 等字段在response header 中返回，便于下次缓存。当然具体的场景，也是看服务器的约定规则设定。
+缓存的不同来源 from disk cache 从磁盘中获取缓存资源，等待下次访问时不需要重新下载资源，而直接从磁盘中获取。它的直接操作对象为CurlCacheManager。
+from memory cache 从内存中获取资源，等待下次访问时不需要重新下载资源，而直接从内存中获取。Webkit早已支持memoryCache。 目前Webkit资源分成两类，一类是主资源，比如HTML页面，或者下载项，一类是派生资源，比如HTML页面中内嵌的图片或者脚本链接，分别对应代码中两个类：　MainResourceLoader和SubresourceLoader。虽然Webkit支持memoryCache，但是也只是针对派生资源，它对应的类为CachedResource，用于保存原始数据（比如CSS，JS等），以及解码过的图片数据。
+区别 当退出进程时，内存中的数据会被清空，而磁盘的数据不会，所以，当下次再进入该进程时，该进程仍可以从diskCache中获得数据，而memoryCache则不行。
+相似 diskCache与memoryCache相似之处就是也只能存储一些派生类资源文件。它的存储形式为一个index.dat文件，记录存储数据的url，然后再分别存储该url的response信息和content内容。Response信息最大作用就是用于判断服务器上该url的content内容是否被修改。
+用户行为 解决方案: 1、页面内容 2、CSS和JS文件 改成 就是只要在每次修改后改一下版本号即可 这样每次修改后都要改，有没有自动加版本号的东西，估计有，如果是JSP和php可以通过脚本 自动生成，如果是纯html也可以通过document.write，或者用动态加载JS的框架啥的。</content></entry><entry><title>一道简单的setTimeout面试题</title><url>/post/web/%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84javascript%E9%9D%A2%E8%AF%95%E9%A2%98/</url><categories><category>Web</category></categories><tags><tag>面试</tag><tag>events</tag></tags><content type="html">这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制:
+for (var i = 0; i &amp;lt; 10; i++) { setTimeout(function () { console.log(i) //10*10 }, 10 * i) } 不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是这样，原因很简单：
+先看下JavaScript的单线程和异步：
+JS是单线程语言，浏览器只分配给JS一个主线程用来执行任务（函数）； 任务一次只能一次，任务会形成队列排队执行； 浏览器会为setTimeout（定时器，异步）单独开一个线程，异步任务完成后会触发回调函数，这时就把回调函数放到主线程任务队列等待执行 具体到例子：
+js没有块级作用域，for循环中i提升为全局变量； setTimeout是异步执行，而for循环为同步执行，每执行一次for循环，setTimeout执行一次，触发一次回调函数； for循环已经执行完时setTimeout内部回调函数开始，i值为10，故最后连续输出10个10 如果需要输出连续数字，则需要采用闭包或ES6语法中的let
+// 闭包 for (var i = 0; i &amp;lt; 10; i++) { void function (j) { setTimeout(function () { console.log(j) }, 10 * j) }(i) } // let for (let i = 0; i &amp;lt; 10; i++) { setTimeout(function () { console.log(i) }, 10 * i) } 闭包：
+JavaScript的函数会形成作用域，闭包就是记住变量不受污染 i作为参数传入匿名函数被记住 let：
+在{ }内形成块级作用域； 生成不同的i实例，形成一个匿名函数自调，类似于闭包</content></entry><entry><title>flex弹性布局</title><url>/post/css/flex%E5%B8%83%E5%B1%80/</url><categories><category>Web</category></categories><tags><tag>flex</tag><tag>css</tag></tags><content type="html"><![CDATA[flex布局是什么 Flex 是 Flexible Box 的缩写，意为&quot;弹性布局&quot;，用来为盒状模型提供最大的灵活性。
+任何一个容器都可以指定为flex布局,包括行内元素
+.box{ display: flex; } .box{ display: inline-flex; } Webkit 内核的浏览器，必须加上-webkit前缀。
+设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。
+基础概念 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称&quot;容器&quot;。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称&quot;项目&quot;。
+容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。
+项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。
+容器的属性 有六个属性设置在容器上:
+flex-direction
+flex-wrap
+flex-flow : flex-direction和flex-wrap的简写 .box { flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;}
+默认值为row nowrap
+justify-content
+align-items
+align-content
+1. flex-direction属性 flex-direction属性决定主轴的方向（即项目的排列方向）。
+row（默认值）：主轴为水平方向，起点在左端。 row-reverse：主轴为水平方向，起点在右端。 column：主轴为垂直方向，起点在上沿。 column-reverse：主轴为垂直方向，起点在下沿。 .box { flex-direction: row | row-reverse | column | column-reverse; } 2. flex-wrap属性 默认情况下，项目都排在一条线（又称&quot;轴线&quot;）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。
+nowrap（默认）：不换行。 wrap：换行，第一行在上方。 wrap-reverse：换行，第一行在下方。 .box{ flex-wrap: nowrap | wrap | wrap-reverse; } nowrap wrap wrap-reverse 3. justify-content属性 justify-content属性定义了项目在主轴上的对齐方式。
+可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。
+flex-start（默认值）：左对齐 flex-end：右对齐 center： 居中 space-between：两端对齐，项目之间的间隔都相等。 space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。 .box { justify-content: flex-start | flex-end | center | space-between | space-around; } 4. align-items属性 align-items属性定义项目在交叉轴上对齐方式。
+可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。
+flex-start：交叉轴的起点对齐。 flex-end：交叉轴的终点对齐。 center：交叉轴的中点对齐。 baseline: 项目的第一行文字的基线对齐。 stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。 .box { align-items: flex-start | flex-end | center | baseline | stretch; } 5. align-content属性 align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+可能取6个值:
+flex-start：与交叉轴的起点对齐。 flex-end：与交叉轴的终点对齐。 center：与交叉轴的中点对齐。 space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。 space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。 stretch（默认值）：轴线占满整个交叉轴。 .box { align-content: flex-start | flex-end | center | space-between | space-around | stretch; } 项目的属性 6个属性设置在项目上(子元素);
+order
+flex-grow
+flex-shrink
+flex-basis
+flex: 是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+flex: none | [ &lt;'flex-grow'&gt; &lt;'flex-shrink'&gt;? || &lt;'flex-basis'&gt; ]
+该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。
+建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
+align-self
+1. order属性 order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+.item { order: &lt;integer&gt;; } 2. flex-grow属性 flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+.item { flex-grow: &lt;number&gt;; /* default 0 */ } 如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
+3. flex-shrink属性 flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+.item { flex-shrink: &lt;number&gt;; /* default 1 */ } 4. flex-basis属性 flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本身大小。
+.item { flex-basis: &lt;length&gt; | auto; /* default auto */ } 它也可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。
+5. align-self属性 align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+.item { align-self: auto | flex-start | flex-end | center | baseline | stretch; /*除了auto，其他都与align-items属性完全一致*/ } 应用实例 骰子 ]]></content></entry><entry><title>58同城面试总结</title><url>/post/web/58%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url><categories><category>Web</category></categories><tags><tag>面试</tag></tags><content type="html"><![CDATA[前言:面试中问了一些基础的问题,非常能反映基本功是否扎实,很佩服58的工程师!
+记录两个印象比较深的两道CSS面试题,面试官对效果实现都是希望多种方法实现,平时的积累需要灵活应用:
+1.左固定一个宽度div,右边div宽度自适应,如何实现? 听到这个问题我还挺开心的,因为前两天还写过,当时也是试了几次才写出来,只是没有在意和及时总结。现场回答的非常不好，比较惭愧,回到家第一件事就把这个题模拟了一下：
+利用绝对定位和padding-left实现 &lt;!DOCTYPE html&gt; &lt;html lang=&#34;en&#34;&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;title&gt;Document&lt;/title&gt; &lt;style&gt; *{ margin:0; padding:0; } .box{ width:100%; position:relative; } .left{ width:300px; position:absolute; z-index: 10; min-height:300px; background:#f00; } .right{ width:100%; position:absolute; padding-left: 300px; box-sizing: border-box; min-height:300px; background:#ff0; } &lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&#34;box&#34;&gt; &lt;div class=&#34;left&#34;&gt;我属于左边&lt;/div&gt; &lt;div class=&#34;right&#34;&gt;我属于右边&lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 2. 写一个弹窗,怎么居中弹窗里的元素? 这个问题平时写的比较多,但疏于整理现场只回答了一个方法,面试官希望有更多方法,现场另举了弹性布局,回来后整理了下,主要有以下四种方法:
+1.居中浮动元素: 1.1 利用margin负值 .son { width:600px ; height:300px; margin: -150px 0 0 -300px; position:absolute;/*父元素relative*/ background-color:pink; left:50%; top:50%; } 1.2 利用translate .father { width: 600px; height: 600px; position: relative; background-color: yellow; } .son { width: 200px; height: 200px; background-color: blue; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); } 1.3 利用弹性布局` .father { width: 600px; height: 600px; background-color: yellow; display: flex; justify-content: center; align-items: center; } .son { width: 200px; height: 200px; background-color: blue; } 1.4 利用margin特性 .father { width: 600px; height: 600px; position: relative; background-color: yellow; } .son { width: 200px; height: 200px; background-color: blue; position: absolute; margin: auto; left: 0; right: 0; top: 0; bottom: 0; } 2.内容居中: .father{ height: 100px; line-height:100px; text-align: center; background-color:pink; } 或者:
+.father{ display:table-cell;/*对象作为表格单元*/ vertical-align:middle; text-align:center; background-color:pink; } ]]></content></entry><entry><title>CSS样式----文字长度溢出显示省略号</title><url>/post/css/css%E6%A0%B7%E5%BC%8F---%E6%96%87%E5%AD%97%E9%95%BF%E5%BA%A6%E6%BA%A2%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7/</url><categories><category>Web</category></categories><tags><tag>css</tag></tags><content type="html">text-overflow省略号样式语法结构 text-overflow语法： text-overflow : clip | ellipsis text-overflow参数值和解释： clip : 不显示省略标记（&amp;hellip;），而是简单的裁切 ellipsis : 当对象内文本溢出时显示省略标记（&amp;hellip;）
+text-overflow应用说明： CSS text-overflow设置或检索是否使用一个省略号标记（&amp;hellip;）标示对象内文本文字的溢出。 要想实现显示不完内容将显示省略号代替，还需要html nobr标签完成（nobr禁止换行标签）
+text-overflow应用案例 1、实现方法 对象设置text-overflow:ellipsis;省略号样式 width:280px; display: inline-block; text-overflow:ellipsis; white-space:nowrap; /*规定段落中的文本不进行换行*/ overflow:hidden;</content></entry><entry><title>CSS学习记录</title><url>/post/css/css%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url><categories><category>Web</category></categories><tags><tag>学习记录</tag></tags><content type="html">1.上外边距的溢出 在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上 特殊条件：（同时满足） 1.父元素不能有上边框； 2.为第一个子元素设置上外边距时 解决方案： 1、 为父元素增加上边框：会影响父元素的高度 2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度 3、 在子元素上增加一个空的元素即可
+2.CSS Sprites雪碧图 将若干副不经常变换的图片封装到一幅大图中 配合背景图片以及背景图片定位将想看的图片显示出来 1） 在页面中创建一个与要显示区域大小一样的元素 2） 将雪碧图作为元素的背景图 3） 改变图片在元素中的位置（左上移动）
+3.背景简写属性——background background：color url( ) repeat attachment position; background: red; background: url(img/mm.png) no-repeat 95% center; 4.字体属性简写方式 属性：font 取值：style variant(小型大写字母) weight size family 注意：一定要将Family写出来，否则无效
+5.伪类选择器 1)目标伪类: :target 对页面中的某个target元素指定样式，该样式只对在用户点击了页面中的超链接并且跳转到target元素后起作用
+2) :before或::before 作用:匹配到某元素的内容区域之前
+特点:外边距溢出问题 3) :after或::after 作用:匹配到某元素内容区域之后
+解决浮动元素父元素的高度问题 :after 特点：1.在父元素的内容区域之后 2.增加一个“空”元素 3.必须是块级元素 4.必须设置clear:both 6.图片和行内快的vertical-align属性 控制图片或行内块元素两边的文本，相对于他们的对齐方式 取值： 1. top 2. middle 3. bottom 4. baseline 基线对齐 a) 行内块：基线是在最后一行文本的底部 b) 图片：基线是在图片底部向下3px(不一定)位置处 img{vertical-align:bottom;} 7. 绝对定位对元素的影响 脱离文档流，允许压在其他元素的上方 2. 绝对定位的元素会变成块级元素 . margin可以正常使用，但是margin的左右auto值会失效 . 绝对定位的元素，将left，right，bottom，top四个值都设置为0 的情况下，margin:auto会让整个元素变得绝对居中 8.弹性布局 8.1 属性:display 取值:
+1、flex：将块级元素变为弹性布局的容器 2、inline-flex：将行内元素变为弹性布局的容器 注意：
+1、 容器中的项目们会自动变为块级元素，允许修改尺寸 2、 项目们的float、clear、vertical-align、全部失效 3、 容器的text-align属性也会失效 8.2 属性flex-wrap 取值:1.nowrap 2.wrap 3.wrap-reverse
+8.3 justify-content 作用：指定项目在主轴上的对齐方式 取值：
+1、 flex-start在轴的起点对齐 2、 flex-end 在轴的终点对齐 3、 center 居中对齐 4、 space-between 两端对齐，项目之间的间隔都是相等的 5、 space-around 每个项目两边的空白间距是相等的 9.转换 transform 取值:
+1.位移:translate(x)/translate(x,y)/translateX(x)/translateY(y) 2.缩放:scale(value)/scale（x，y）/scaleX（x）/scaleY（y） 3.旋转:rotate(ndeg) 4.倾斜:skewX(ndeg)/skewY(ndeg)/skew(x)/skew(x,y) 9.1 转换原点
+属性:transform-origin 取值:1. 两个值：表示原点在x轴和y轴的位置 2. 三个值：表示原点在x轴、y轴和z轴的位置 可以取数值/百分比/关键字，多个值用空格隔开 9.2 3D转换(模拟人眼睛到3D转换物体的距离，取值越大，表示离物体越远，表示离物体越近)
+属性:perspective 取值:rotateX(xdeg) 以x轴为中心轴旋转 rotateY(ydeg) 以y轴为中心轴旋转 rotateZ(zdeg) 以z轴为中心轴旋转 rotate3D(x,y,z,ndeg) x,y,z 取值大于0的话，则该轴参与旋转 x,y,z 取值为0的话，则该轴不参与旋转 rotate3D(1,0,0,45deg)==&amp;gt;rotateX(45deg) 10.过渡 属性:transition 取值:property duration timing-function delay; 11.动画 样式表中,通过@keyframes规则来声明动画
+@keyframes 动画名称name{ 0%{ /*动画开始时，元素的样式*/ 属性：值; 属性: 值; } 50%{ /*动画执行到一半时，元素的样式*/ } 100%{ /*动画结束时，元素的样式*/ 属性: 值; 属性: 值; } } 11.1动画声明的浏览器兼容性 Firefox：@-moz-keyframes{ } Chrome &amp;amp; Safari: @-webkit-keyframes{ } Oprea: @-o-keyframes{ } 11.2调用动画简写属性:animation 取值:name duration timing-function delay iteration-count(播放次数) direction
+11.3动画填充模式:animation-fill-mode 取值: 1.none 默认值，无任何效果 2.forwards 档动画播放完成后，元素将保持在最后一个帧的状态上 3.backwards 动画播放前，在延迟时间内，动画将保持在第一帧的状态上 4.both 动画播放前后，分别应用在第一帧和最后一个帧上 11.4动画播放状态animation-play-state 取值
+paused：动画暂停 2. running：动画播放</content></entry><entry><title>餐饮研发员的基本素质</title><url>/post/food/%E9%A4%90%E9%A5%AE%E7%A0%94%E5%8F%91%E5%91%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B4%A0%E8%B4%A8/</url><categories><category>餐饮</category></categories><tags><tag>工作感想</tag></tags><content type="html">餐饮属于快节奏的行业，对研发员的工作是很大的挑战。
+现在的餐饮都要做标准化，也要做创新，那么如何去做一位合格的餐饮研发员呢？
+首先要明确研发的定位，设定一个场景：
+当一家连锁餐饮企业希望由我们作为他们的中央厨房代加工，他们有自己成熟的菜品，包括配方和工艺，但他们缺少工业化生产的工艺和经验，需要我们为他们解决以达到合作。
+这里研发的价值就是：转化客户现有的产品，在保证客户口感的前提下，实现产品和工业化生产，输出工业化生产工艺标准和产品标准。
+这里有两种做法：
+将客户的产品在研发厨房模拟操作，做到口味相近，写出标准化生产的工艺和产品标准，再去生产车间按标准中试，产品达到客户要求则研发过程结束，产品不合格再调整工艺直到符合客户要求； 对客户的产品进行分拆：原料、配方、工艺、包装、成品。分析成品选择合适的原料，结合研发厨房和测试，确定生产加工的工艺和产品和包装，寻求产品在品质和成本之间的平衡点。 两类研发都输出产品的工业化工艺标准和产品标准，但却有本质的区别。
+第一种是标准化转化工作，只能凭借自身丰富的厨政经验和生产实际经验，不断摸索尝试，达到产品输出的目的。只能针对普通要求的客户进行产品制作，专业性差。
+第二种是才是研发工作，运用专业的知识从源头为客户提供解决方案。针对客户的需求选用合适的原料和合适的加工工艺，并且在源头就解决产品在输出过程中可能遇到的问题。可以针对不同层次要求的客户进行产品定制，并在研发中不断积累自身的核心产品和加工技术。
+做食品研发不仅要明确方向，更要专一、沉稳！浮躁的心做不好研发工作。
+餐饮的研发是食品研发中最考验研发员的工作态度的工作，承接餐饮客户的部分产品是必然，这就决定了工作节奏快，不能给你充足的时间去研究产品，以解决问题为主。而在一些项目开发中，你要深度运用自己的专业知识去挖掘。专业的事让专业的人做，研发要追求完美的产品，过程不一定全程参与，但一定要明白产品做出来的关键点也就是核心技术，这样才能掌握产品和标准，你才是产品的核心！
+不论是餐饮客户产品转化还是项目开发，作为一名合格的餐饮研发员，需要明白工作的目的，明确自己的目标，要不断去比较，不断的去总结。
+** 研发是一门独孤求败的匠心工作，追求极致，如果你心沉浸在这里，一切的辛苦，在看到产品被人赞美的那一刻，都是值得的！**</content></entry><entry><title>浅谈餐饮的标准化</title><url>/post/food/%E6%B5%85%E8%B0%88%E9%A4%90%E9%A5%AE%E7%9A%84%E6%A0%87%E5%87%86%E5%8C%96/</url><categories><category>餐饮</category></categories><tags><tag>工作感想</tag></tags><content type="html"> 对于餐饮，我其实第一感觉就是不喜欢，因为不规范。
+餐饮从业者大部分都是厨师，他们有丰富的厨艺和从业经验，可以说他们炒一个菜是分分钟的事。但是，并不是每一位厨师都是大师，更多的是一个厨子。
+当前餐饮连锁店都倡导标准化转化，厨师也做起了研发，一道“西红柿炒鸡蛋”可以分解成几种原料形式，分别打包在独立包装，用时拆包混合就行。似乎看起来很简单，但实际做的时候没有那么简单。做一锅一人份的和一锅100人份的西红柿炒鸡蛋的配方和工艺完全不一样，加工的时间、加热的温度、所需要的原辅料添加重量、添加的顺序都需要重新计算，不再是适量、少许、火候、爆香等传统厨师用语来衡量，必须由准确的数据来定量每一道工序，普通的厨师做得到吗？
+现在的餐饮必然会是厨师+食品专业技术人员结合，由厨师做出一道菜，专业人员负责从食材的选择、工艺记录、产品标准制定等整个过程。不仅仅是这样，专业人员还需要研究这道菜在做出来后的风味变化，采用什么的工艺、包装以及储存条件才能让菜品风味保存更久，口感达到最佳的一个状态。这个就需要科学的理论支持。
+现在我们总是自以为是，以为自己什么都会，厨师可以去研究专业理论，食品专业的人可以去做菜。**真正的资源最大化利用是取长补短，由食品专业的人科普食品加工知识，厨师传授做菜的经验。**
+>一道“西红柿炒鸡蛋”可以有几十种口味，但一份工艺只会产出一种口味或者说几种相近的口味，这就是标准化的能力。 现在的研发厨师不一定会编制这样的工艺，但都懂这样的标准化工艺带来的好处。但进一步的说,如何将这样标准化的菜品提升，可能才是餐饮标准化的核心技术。
+菜品进一步分解：
+> * 选择不同的食材、采用不同的工艺技术，做出不同等级的菜品； > * 利用食品添加剂，改善菜品最终的成色和口感； > * 通过杀菌技术和包装技术，最大程度的延长货架期和保留风味； > * 总结菜品的加工规律，利用数据分析菜品加工变化，优化菜品加工工艺； 知识是为人服务的并指引正确方向的，资源也是要共享的，餐饮的标准化一定是厨师传授专业人员做菜过程，专业人员用科学的方法指引厨师做菜提升菜品品质。</content></entry><entry><title>苹果为什么会褐变</title><url>/post/food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</url><categories><category>餐饮</category></categories><tags><tag>保鲜知识</tag></tags><content type="html"> 当切开的苹果不及时吃掉，它就会由白色苹果慢慢变成暗淡的棕褐色苹果，影响你的食欲。最好的消息是它依然是安全的苹果，你可以吃掉它。导致苹果变色的原因是酶促褐变，当植物组织内存在的酶与多酚类物质结合在氧气的环境下产生的分子反应，产生的黑色素。
+不仅苹果有这种现象，其他水果如梨、香蕉、鳄梨、茄子和土豆都存在酶促褐变，因为他们都存在酶的底物————酚类化合物。 切块的苹果让细胞组织破碎，原本分开的酚类物质和酶相结合，同时当你切开苹果时，酚类物质与酶的混合物就会暴露在空气中，就会产生氧化褐变过程。这个过程持续时间越长，褐变程度越深，直到酚类物质消耗完，这时苹果也就变成棕色的了。
+酶只是普通的蛋白质，但是它在自然界中有特殊的功能。大多数化学反应需要较高的活化能才能进行，而酶可以降低化学反应的活化能促使一些反应发生。酶是一种催化剂，它能加快化学反应速率。本身酶在反应过程中不被消耗，也不影响反应的化学平衡。但它会不断催化化学反应进行。有些反应是不可逆的，如水果切块的酶促褐变反应，
+但酶在食品中也有重要的积极作用，举个例子：凝乳酶可以促使液态来凝结成奶酪，乳糖酶可以分解我们人体内的乳糖（除非你有乳糖不耐症），食品工业中还利用酶含量来判断海鲜的新鲜度、巴氏杀菌奶的安全以及其他积极应用。此外，酶促褐变反应还有利于茶、咖啡和葡萄干形成理想的色泽。</content></entry><entry><title>flex-shrink 新弹性和模型属性</title><url>/post/css/flex-shrink-%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</url><categories><category>Web</category></categories><tags><tag>flex</tag></tags><content type="html"><![CDATA[语法： flex-shrink： 默认值：1 适用于：flex子项 继承性：无 动画性：是 计算值：指定值 说明： 设置或检索弹性盒的收缩比率。 根据弹性盒子元素所设置的收缩因子作为比率来收缩空间。 示例：a,b,c将按照1:1:3的比率来收缩空间
+&lt;ul class=&#34;flex&#34;&gt; &lt;li&gt;a&lt;/li&gt; &lt;li&gt;b&lt;/li&gt; &lt;li&gt;c&lt;/li&gt; &lt;/ul&gt; &lt;style&gt; .flex{display:flex;width:400px;margin:0;padding:0;list-style:none;} .flex li{width:200px;} .flex li:nth-child(3){flex-shrink:3;} &lt;/style&gt; flex-shrink的默认值为1，如果没有显示定义该属性，将会自动按照默认值1在所有因子相加之后计算比率来进行空间收缩。 本例中c显式的定义了flex-shrink，a,b没有显式定义，但将根据默认值1来计算，可以看到总共将剩余空间分成了5份，其中a占1份，b占1份，c占3分，即1:1:3 我们可以看到父容器定义为400px，子项被定义为200px，相加之后即为600px，超出父容器200px。那么这么超出的200px需要被a,b,c消化 通过收缩因子，所以加权综合可得2001+2001+200*3=1000px； 于是我们可以计算a,b,c将被移除的溢出量是多少： a被移除溢出量：(200*1/1000)*200，即约等于40px
+b被移除溢出量：(200*1/1000)*200，即约等于40px
+c被移除溢出量：(200*3/1000)*200，即约等于120px
+最后a,b,c的实际宽度分别为：200-40=160px, 200-40=160px, 200-120=80px
+]]></content></entry><entry><title>Viewport剖析</title><url>/post/css/viewports%E5%89%96%E6%9E%90/</url><categories><category>Web</category></categories><tags><tag>css</tag></tags><content type="html"><![CDATA[转载自W3CPlus创始人 大漠 博客: 原文链接 1. 桌面（pc）浏览器 1.1 设备的pixels和CSS的pixels pixels决定了你工作所用的那些设备上正式的分辨率。在大多数情况下，能够从screen.width/height上取出具体值
+如果用户缩放（zoom）了浏览器，当然必须改变计算方式。
+现代浏览器上的缩放，是基于“伸展”pixels。结果是，html元素上的宽度并没有因为缩放200%而由128pix变成256px，而是真实的pixels的被计算成了双倍。html元素在形式上依然是128CSS的pixels，即便它占用了256设备的pixels 。
+有4个1像素，缩放为100%的html元素，CSS的pixels完整的和设备的pixels重叠: 当我们缩小浏览器时，CSS的pixels开始收缩，导致1单位的设备的pixels上重叠了多个CSS的pixels 同理，放大浏览器时，相反的事情发生了，CSS的pixels开始扩大，导致1单位的CSS的pixels上重叠了多个设备的pixels 你只需要关注CSS的pixels，这些pixels指定你的样式被如何渲染.
+1.2 100% 缩放 在缩放级别为100%时，1单位的CSS的pixel是严格相等于1单位的设备pixel，通常会在100%缩放级别下测试网站
+1.2.1 屏幕尺寸 Screen size 含义：用户的屏幕的完整大小。这两个属性包含了用户屏幕的完整宽度/高度,尺寸使用设备的pixels来定义，他们的值不会因为缩放而改变(显示器的特征，而不是浏览器)
+度量：设备的pixels,screen.width/height (基本无用)
+兼容性问题：IE8里，不管使用IE7模式还是IE8模式，都以CSS的pixels来度量
+1.2.2 浏览器尺寸 Window size 含义：包含滚动条尺寸的浏览器完整尺寸; 想要知道的浏览器的内部尺寸。它定义了当前用户有多大区域，可供你的CSS布局占用 度量：CSS的pixels, window.innerWidth/Height 兼容性问题：IE不支持，Opera用设备pixels来度量
+1.2.3 滚动移位 Scrolling offset 含义：页面的移位 , 定义了页面(document)的相对于窗口原点的水平、垂直位移。因此你能够定位用户滚动了多少的滚动条距离。
+度量：CSS的pixels, window.pageX/YOffset
+兼容性问题：pageXOffset 和 pageYOffset 在 IE 8 及之前版本的IE不支持, 使用”document.body.scrollLeft” and “document.body.scrollTop” 来取代
+1.2.4 视窗 viewport viewport的功能在于控制你网站的最高块状（block）容器：&lt;html&gt; 元素。viewport是严格的等于浏览器的窗口,viewport不是一个HTML的概念，不能通过CSS修改它。
+举个例子~假设你定义了一个可变尺寸的布局（liquid layout），且你定义一个侧边栏的宽度为width: 10%。当你改变浏览器窗口大小时，该侧边栏会自动扩张和收缩。
+原理是侧边栏的宽度为它父元素宽度的10%
+一个块级元素占有起父元素的100%的宽度（这里有异常情况，暂时忽略）。所以&lt;body&gt;的宽度就是其父元素&lt;html&gt;的宽度。
+那么&lt;html&gt;元素到底有多宽？因为它的宽度恰好为浏览器的宽度。所以你的侧边栏宽度width: 10%会占用10%的浏览器宽度。所以的web开发人员都直观的知道和使用该特性了。 但是你也许不知道原理。在原理上，&lt;html&gt;的宽度受viewport所限制，&lt;html&gt;元素为viewport宽度的100%。
+1.2.5 页面宽度 document width 度量viewport 尺寸 : 含义：viewport的尺寸
+度量：CSS的pixels, document. documentElement. clientWidth/Height
+兼容性问题：无
+document.documentElement实际上就是·&lt;html&gt;元素：HTML文档的根元素，然而viewport是比&lt;html&gt;更高级别的元素，打个比喻，它是容纳&lt;html&gt;元素的元素。
+document. documentElement. clientWidth/Height只会给出viewport的尺寸，而不管&lt;html&gt;元素尺寸如何改变
+度量&lt;html&gt; 元素 含义：&lt;html&gt;的尺寸
+度量：CSS的pixels, document. documentElement. offsetWidth/Height
+兼容性问题：IE用这个值标示viewport的尺寸而非&lt;html&gt;
+如果clientWidth/Height一直用以标示viewport的尺寸，我们该如何去获取&lt;html&gt;元素的尺寸呢？答案是：document.documentElement.offsetWidth/Height。
+这个特性对真实的让你访问块级元素&lt;html&gt;元素，如果你为&lt;html&gt;元素赋值了宽度，offsetWidth会真实的反应出来
+1.3 几种尺寸区别 window.innerWidth/Height 包含滚动条 document. documentElement. clientWidth/Height: 不包含滚动条 viewport尺寸 document. documentElement. offsetWidth：html尺寸 1.4 事件坐标 pageX/Y：从&lt;html&gt;原点到事件触发点的CSS的 pixels (使用概率:90%) clientX/Y：从viewport原点（浏览器窗口）到事件触发点的CSS的 pixels (使用概率:10%) screenX/Y：从用户显示器窗口原点到事件触发点的设备 的 pixels。(使用概率:0%) 兼容性问题：IE不支持pageX/Y,IE使用CSSpixels来度量screanX/Y 1.5 Media查询 含义：可以根据页面的特定宽度来定义特殊的CSS规则。 度量：width/height 和 device-width/device-heigh 兼容性问题：IE不支持. div.sidebar { width: 300px; } @media all and (max-width: 400px) { div.sidebar { width: 100px; } } /*如果宽度大于400px，那么sidebar宽度为300px。反之，sidebar宽度为100px*/ device-width/height: 使用screen.width/height来做为的判定值。该值以设备的pixels来度量 width/height: 使用documentElement.clientWidth/Height即viewport的值。该值以CSS的pixels来度量 2. 移动端浏览器 2.1 一些概念 2.1.1 视窗 viewport 简单的理解，viewport是严格等于浏览器的窗口。在桌面浏览器中，viewport就是浏览器窗口的宽度高度。但在移动端设备上就有点复杂。
+移动端的viewport太窄，为了能更好为CSS布局服务，所以提供了两个viewport：虚拟的viewportvisualviewport和布局的viewportlayoutviewport。
+2.1.2 物理像素(physical pixel) 又称为设备像素
+设备独立像素(density-independent pixel) 设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)，然后由相关系统转换为物理像素。
+CSS像素 CSS像素是一个抽像的单位，主要使用在浏览器上，用来精确度量Web页面上的内容。一般情况之下，CSS像素称为与设备无关的像素(device-independent pixel)，简称DIPs。
+屏幕密度 屏幕密度是指一个设备表面上存在的像素数量，它通常以每英寸有多少像素来计算(PPI)。
+设备像素比(device pixel ratio) 设备像素比简称为dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：
+设备像素比 ＝ 物理像素 / 设备独立像素 在JavaScript中，可以通过window.devicePixelRatio获取到当前设备的dpr。
+在CSS中，可以通过-webkit-device-pixel-ratio，-webkit-min-device-pixel-ratio和 -webkit-max-device-pixel-ratio进行媒体查询，对不同dpr的设备，做一些样式适配(这里只针对webkit内核的浏览器和webview)。
+dip或dp,（device independent pixels，设备独立像素）与屏幕密度有关。dip可以用来辅助区分视网膜设备还是非视网膜设备。
+iPhone6的设备宽度和高度为375pt * 667pt,可以理解为设备的独立像素；而其dpr为2，根据上面公式，我们可以很轻松得知其物理像素为750pt * 1334pt。
+在不同的屏幕上，CSS像素所呈现的物理尺寸是一致的，而不同的是CSS像素所对应的物理像素具数是不一致的。在普通屏幕下1个CSS像素对应1个物理像素，而在Retina屏幕下，1个CSS像素对应的却是4个物理像素。
+在移动端时代屏幕适配除了Layout之外，还要考虑到图片的适配，因为其直接影响到页面显示质量
+meta标签 viewport的meta标签，其主要用来告诉浏览器如何规范的渲染Web页面，而你则需要告诉它视窗有多大。
+在开发移动端页面，我们需要设置meta标签如下：
+&lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1, maximum-scale=1&#34;&gt; 代码以显示网页的屏幕宽度定义了视窗宽度。网页的比例和最大比例被设置为100%。
+CSS单位rem 在 W3C 规范中是这样描述rem的: font size of the root element
+简单的理解，rem就是相对于根元素&lt;html&gt; 的font-size来做计算。
+2.2 适配方案 在移动端布局，我们需要面对两个最为重要的问题：
+各终端下的适配问题 Retina屏的细节处理 2.2.1 适配终端 以前的 Flexible方案 是通过JavaScript来模拟vw的特性，如今vw已经得到了众多浏览器的支持，也就是说，可以直接考虑将vw单位运用于我们的适配布局中。
+vw 是基于Viewport视窗的长度单位，这里的视窗（Viewport）指的就是浏览器可视化的区域，而这个可视区域是window.innerWidth/window.innerHeight的大小。用下图简单的来示意一下：
+在 CSS Values and Units Module Level 3 中和Viewport相关的单位有四个，分别为vw、vh、vmin和vmax。
+vw：是Viewport&rsquo;s width的简写,1vw等于window.innerWidth的1% vh：和vw类似，是Viewport&rsquo;s height的简写，1vh等于window.innerHeihgt的1% vmin：vmin的值是当前vw和vh中较小的值 vmax：vmax的值是当前vw和vh中较大的值 vmin和vmax是根据Viewport中长度偏大的那个维度值计算出来的，如果window.innerHeight &gt; window.innerWidth则vmin取百分之一的window.innerWidth，vmax取百分之一的window.innerHeight计算。
+这个方案中大胆的使用vw来替代以前Flexible中的rem缩放方案
+目前出视觉设计稿，我们都是使用750px宽度的，从上面的原理来看，那么100vw = 750px，即1vw = 7.5px。那么我们可以根据设计图上的px值直接转换成对应的vw值。看到这里，很多同学开始感到崩溃，又要计算，能不能简便一点，能不能再简单一点，其实是可以的，我们可以使用PostCSS的插件 postcss-px-to-viewport ，让我们可以直接在代码中写px，比如：
+[w-369]{ width: 369px; } [w-369] h2 span { background: #FF5000; color: #fff; display: inline-block; border-radius: 4px; font-size: 20px; text-shadow: 0 2px 2px #FF5000; padding: 2px 5px; margin-right: 5px; } PostCSS编译之后就是我们所需要的带vw代码：
+[w-369] { width: 49.2vw; } [w-369] h2 span { background: #ff5000; color: #fff; display: inline-block; border-radius: .53333vw; text-shadow: 0 0.26667vw 0.26667vw #ff5000; padding: .26667vw .66667vw; } [w-369] h2 span, [w-369] i { font-size: 2.66667vw; margin-right: .66667vw; } 在实际使用的时候，你可以对该插件进行相关的参数配置：
+&#34;postcss-px-to-viewport&#34;: { viewportWidth: 750, viewportHeight: 1334, unitPrecision: 5, viewportUnit: &#39;vw&#39;, selectorBlackList: [], minPixelValue: 1, mediaQuery: false } 假设你的设计稿不是750px而是1125px，那么你就可以修改vewportWidth的值。有关于该插件的详细介绍， 可以阅读其官方使用文档 。
+在哪些地方可以使用vw来适配我们的页面。根据相关的测试：
+容器适配，可以使用vw 文本的适配，可以使用vw 大于1px的边框、圆角、阴影都可以使用vw 内距和外距，可以使用vw 另外有一个细节需要特别的提出，比如我们有一个这样的设计：
+如果我们直接使用：
+[w-188-246] { width: 188px; } [w-187-246]{ width: 187px } 最终的效果会造成[w-187-246]容器的高度小于[w-188-246]容器的高度。这个时候我们就需要考虑到 容器的长宽比缩放 。这方面的方案很多，但我还是推荐工具化来处理，这里推荐@一丝 姐姐写的一个PostCSS插件 postcss-aspect-ratio-mini 。这个插件使用很简单，不需要做任何的配置，你只需要本地安装一下就OK。使用的时候如下：
+[aspectratio] { position: relative; } [aspectratio]::before { content: &#39;&#39;; display: block; width: 1px; margin-left: -1px; height: 0; } [aspectratio-content] { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; } [aspectratio][aspect-ratio=&#34;188/246&#34;]{ aspect-ratio: &#39;188:246&#39;; } 编译出来：
+[aspectratio][aspect-ratio=&#34;188/246&#34;]:before { padding-top: 130.85106382978725%; } 这样就可以完美的实现长宽比的效果。
+]]></content></entry><entry><title>跨域资源共享CORS</title><url>/post/web/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-cors/</url><categories><category>Web</category></categories><tags><tag>Http</tag><tag>Ajax</tag><tag>学习记录</tag></tags><content type="html"><![CDATA[CORS是一个W3C标准,全称是&quot;跨域资源共享&quot;(Cross-origin resource sharing)。它允许浏览器向夸源服务器发出XMLHttpRequest请求，克服Ajax只能同源使用的限制。
+一、简介 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。 整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。 因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。
+二、两种请求 浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。
+2.1简单请求 简单请求满足一下两大条件 (1)请求方法时一下三种方法之一
+HEAD GET POST (2)HTTP的头信息不超出一下几种字段:
+Accept Accept-Language Content-Language Last-Event-ID Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain 凡是不同时满足上面两个条件，就属于非简单请求。
+2.1.1 基本流程 对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。 下面的例子,浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。
+GET /cors HTTP/1.1 Origin: &#39;http://api.bob.com&#39; Host: &#39;api.alice.com&#39; Accept-Language: en-US Connection: keep-alive User-Agent: Mozilla/5.0... //上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。 如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。 这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200
+如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。 //浏览器响应头res Access-Control-Allow-Origin: &#39;http://api.bob.com&#39; Access-Control-Allow-Credentials: true Access-Control-Expose-Headers: FooBar Content-Type: text/html; charset=utf-8 //上面的头信息之中，有三个与CORS请求相关的字段，都以Access-Control-开头。 (1)Access-Control-Allow-Origin(必须) 该字段是必须的。受任意域名的请求。
+(2)Access-Control-Allow-Credentials(可选) 它的值是一个布尔值，表示是否允许发送Cookie。 默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。
+(3)Access-Control-Expose-Headers(可选) CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。上面的例子指定，getResponseHeader(&lsquo;FooBar&rsquo;)可以返回FooBar字段的值。
+2.1.2 withCredentials 属性 上面说到，CORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段。
+Access-Control-Allow-Credentials: true 同时开发者必须在AJAX请求中打开withCredentials属性。
+var xhr = new XMLHttpRequest(); xhr.withCredentials = true; 这样就能向服务器发送Cookie,服务器才能获得SessionId; 否则，即使服务器同意发送Cookie，浏览器也不会发送。或者，服务器要求设置Cookie，浏览器也不会处理,这时服务器会新建一个新的Cookie的Id号。
+但是，有时即使省略withCredentials设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭withCredentials。
+xhr.withCredentials = false; 注意:如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。
+2.2非简单请求 2.2.1预检请求 非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。 非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为&quot;预检&quot;请求（preflight）。 浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。 下面是一段浏览器的JavaScript脚本。
+var url = &#39;http://api.alice.com/cors&#39;; var xhr = new XMLHttpRequest(); xhr.open(&#39;PUT&#39;, url, true); xhr.setRequestHeader(&#39;X-Custom-Header&#39;, &#39;value&#39;); xhr.send(); //上面代码中，HTTP请求的方法是PUT，并且发送一个自定义头信息X-Custom-Header。 浏览器发现，这是一个非简单请求，就自动发出一个&quot;预检&quot;请求，要求服务器确认可以这样请求。 下面是这个&quot;预检&quot;请求的HTTP头信息。
+OPTIONS /cors HTTP/1.1 Origin: &#39;http://api.bob.com&#39; Access-Control-Request-Method: PUT Access-Control-Request-Headers: X-Custom-Header Host: api.alice.com Accept-Language: en-US Connection: keep-alive User-Agent: Mozilla/5.0... &ldquo;预检&quot;请求用的请求方法是OPTIONS，表示这个请求是用来询问的。头信息里面，关键字段是Origin，表示请求来自哪个源。 除了Origin字段，&ldquo;预检&quot;请求的头信息包括两个特殊字段。
+(1)Access-Control-Request-Method 该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。 (2)Access-Control-Request-Headers 该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。 转载自阮一峰的网络日志
+]]></content></entry><entry><title>利用H5画随机色圆</title><url>/post/html5/%E5%88%A9%E7%94%A8h5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</url><categories><category>Web</category></categories><tags><tag>HTML5</tag><tag>CSS3</tag></tags><content type="html"><![CDATA[忽然想到曾经遇到的一个案例：
+​	在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。
+在这里用代码重现下，首先分析下需求：
+绘制页面： 生成随机数，根据随机数生成随机颜色 利用svg绘图技术在页面绘制随机数量的圆 将圆填充随机色 JS事件： 为每个圆绑定单击事件
+创建定时器
+代码：
+生成随机数和随机颜色方法 /*获取指定范围内的随机数字*/ function randomNum(min,max){ var n=Math.random()*(max-min)+min; return Math.floor(n) } /*生成随机色*/ function randomColor(min,max){ var r=randomNum(min,max); var g=randomNum(min,max); var b=randomNum(min,max); var a=Math.random(); return `rgba(${r},${g},${b},${a})`; } 利用svg绘图 html:
+&lt;svg id=&#34;svg&#34; width=&#34;1000px&#34; height=&#34;500px&#34;&gt;&lt;/svg&gt; JavaScript:
+var svg=document.getElementById(&#34;svg&#34;); for(var i=0;i&lt;50;i++){ //创建圆元素 var c=document.createElementNS(&#34;http://www.w3.org/2000/svg&#34;,&#34;circle&#34;); c.setAttribute(&#34;r&#34;,randomNum(10,80)); c.setAttribute(&#34;cx&#34;,randomNum(0,800)); c.setAttribute(&#34;cy&#34;,randomNum(0,400)); c.setAttribute(&#34;fill&#34;,randomColor(0,255)); c.setAttribute(&#34;fill-opacity&#34;,Math.random()); svg.appendChild(c) //绑定单击事件 c.onclick=function(){ var that=this; //设置循环定时器 var timer=setInterval(function(){ var r=that.getAttribute(&#34;r&#34;); r*=1.05; that.setAttribute(&#34;r&#34;,r); var fillOpac=that.getAttribute(&#34;fill-opacity&#34;); fillOpac*=0.9; that.setAttribute(&#34;fill-opacity&#34;,fillOpac); //设置循环定时器停止条件 if(fillOpac&lt;0.001){ clearInterval(timer); timer=null; svg.removeChild(that); } },20)() } } 附上 codePen链接 效果图:
+]]></content></entry><entry><title>一年四季的时令蔬菜水果表</title><url>/post/food/%E4%B8%80%E5%B9%B4%E5%9B%9B%E5%AD%A3%E7%9A%84%E6%97%B6%E4%BB%A4%E8%94%AC%E8%8F%9C%E6%B0%B4%E6%9E%9C%E8%A1%A8/</url><categories><category>餐饮</category></categories><tags><tag>蔬菜</tag><tag>水果</tag></tags><content type="html"> 春季（农历一~三月） 蔬菜：辣椒、青椒、彩椒、洋葱、花椰菜、甜豆、豌豆、芹菜、 莴苣、荠菜、油菜、菠菜、香椿、春笋、马兰头、瓠瓜、韭菜、 春韭、菜心、茼蒿、豆苗、蒜苗、春笋等 水果：番石榴、青枣、枇杷、桑葚、樱桃、莲雾（春末）。
+夏季（农历四~六月） 蔬菜：辣椒、丝瓜、苦瓜、冬瓜、菜豆、芦笋、茭白、洋葱、黄瓜、佛手瓜、 南瓜、苋菜、山苏、空心菜、龙须菜、地瓜叶、竹笋、生菜、西红柿、卷心菜、 茄子、豇豆、黄瓜、西红柿、东瓜、四季豆、蚕豆等 水果：草莓、莲雾、桃、李、西瓜、菠萝、芒果、柠檬、百香果、 火龙果、杏、荔枝、猕猴桃、香蕉、椰子、樱桃。
+秋季（农历七~九月） 蔬菜：秋葵、菱角、莲藕、辣椒、栗子、冬瓜、四季豆（芸豆）、 地瓜叶、豆角、山药、白菜、扁豆。 菜花、胡萝卜、藕、大葱、 豆角、黄瓜、西红柿、藕、茄子、百合 水果：柚子、梨、柿子、木瓜、苹果、莲子、甘蔗、葡萄、火龙果、 杨桃、番石榴、杏、橘子、红枣、山楂、核桃。
+冬季（农历十~十二月） 蔬菜：青椒、卷心菜、白菜、洋葱、花椰菜、胡萝卜、萝卜、 甜豆、芹菜、菠菜、芥菜、葵年菜、莴苣、花椰菜、大白菜、 油菜、油麦菜、菜心、芥菜、菠菜、黄芽白、芥蓝、荸荠、藕等 水果：橙、橘子、柚子、青枣、甘蔗、释迦。
+按月份排的时令蔬菜水果 1月：青菜、卷心菜、菠菜、芹菜、萝卜、慈菇等 2月：青菜、卷心菜、菠菜、芹菜、菜尖等 3月：青菜、菠菜、芹菜、菜尖、花菜等 4月：青菜、莴笋、鸡毛菜、芹菜 5月：青菜、卷心菜、莴笋、鸡毛菜、黄瓜、蚕豆、茭白、番茄等 6月：卷心菜、黄瓜、番茄、土豆、鸡毛菜、刀豆（菜豆）、茄子、南瓜等 7月：豇豆、茄子、鸡毛菜、卷心菜、冬瓜、丝瓜、毛豆、辣椒、土豆、扁豆、卷心菜、空心菜等 8月：冬瓜、豇豆、茄子、青菜、鸡毛菜、南瓜、丝瓜、毛豆、辣椒、土豆、扁豆、卷心菜、空心菜等 9月：青菜、冬瓜、萝卜、丝瓜、毛豆、豇豆、茄子、辣椒、芋艿、茭白、卷心菜、扁豆等 10月：青菜、卷心菜、菠菜、芹菜、萝卜、芋艿、茭白、花菜、茼蒿、生菜、花瓜等 11月：青菜、卷心菜、菠菜、芹菜、萝卜、莴笋、花菜、荠菜、草头、生菜、慈菇、青蒜等 12月：青菜、卷心菜、博菜、芹菜、萝卜、塌菜、荠菜、慈菇、花菜等 要吃就吃当季水果各种水果成熟时间汇总 1月(冬季) 木瓜 红香蕉 樱桃番茄 杨桃 柑橘橙 青枣 甘果蔗 草莓 番石榴 牛奶蕉 柑桔 观赏南瓜 无花果 鹤首瓜
+2月(冬季) 木瓜 红香蕉 樱桃番茄杨桃 番荔枝 青枣 甘果蔗 草莓 番石榴 牛奶蕉 柑桔 观赏南瓜 鹤首瓜
+3月(春季) 枇杷 红香蕉 樱桃番茄杨桃 番荔枝 青枣 甘果蔗 草莓 番石榴 牛奶蕉 柑桔 观赏南瓜 果桑 鹤首瓜 蛇瓜
+4月(春季) 枇杷 红香蕉 樱桃番茄荔枝 番荔枝 蛇瓜 甘果蔗 果桑 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 澳州坚果 柠檬
+5月(春季) 芒果 红香蕉 樱桃番茄荔枝 番荔枝 蛇瓜 黄皮 果桑 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 李 西瓜 桃 香瓜 柠檬 台湾莲雾 澳州坚果油梨
+6月(夏季) 芒果 红香蕉 樱桃番茄荔枝 番荔枝 蒲瓜 黄皮 果桑 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 李 西瓜 桃 香瓜 柠檬 台湾莲雾 澳州坚果菠萝 火龙果油梨
+7月(夏季) 芒果 红香蕉 樱桃番茄荔枝 番荔枝 蒲瓜 黄皮 番龙眼 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 李 西瓜 桃 香瓜 柠檬 台湾莲雾 澳州坚果菠萝 火龙果 油梨龙眼 百香果 菠萝蜜
+8月(夏季) 芒果 红香蕉 樱桃番茄木瓜 番荔枝 蒲瓜 杨桃 番龙眼 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 日本甜柿 西瓜 黑提子 香瓜 柠檬 菠萝蜜澳州坚果 菠萝 火龙果油梨 龙眼 百香果
+9月(秋季) 芒果 红香蕉 鸡蛋果木瓜 番荔枝 百香果 杨桃 番龙眼 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 日本甜柿 西瓜 黑提子 香瓜 柠檬 菠萝蜜油梨 菠萝火龙果
+10月(秋季) 樱桃番茄 红香蕉 鸡蛋果木瓜 台湾甜玉米 百香果 杨桃 无花果 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 火龙果 西瓜 黑提子 人心果 柠檬菠萝 油梨
+11月(秋季) 樱桃番茄 红香蕉 鸡蛋果木瓜 台湾甜玉米 百香果 杨桃 无花果 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 火龙果 台湾青枣 黑提子 人心果柠檬 菠萝油梨
+12月(冬季) 樱桃番茄 红香蕉 鸡蛋果木瓜 草莓 百香果 杨桃 无花果 番石榴 牛奶蕉 鹤首瓜 观赏南瓜 果蔗 台湾青枣 黑提子 人心果 柠檬 菠萝油梨柑橘橙
+按季节分的时令蔬果： 春季（农历一~三月） 蔬菜：辣椒、青椒、彩椒、洋葱、花椰菜、甜豆、豌豆、芹菜、莴苣、荠菜、油菜、菠菜、香椿、春笋、马兰头、瓠瓜。 水果：番石榴、青枣、枇杷、桑葚、樱桃、莲雾（春末）。
+夏季（农历四~六月） 蔬菜：辣椒、丝瓜、苦瓜、冬瓜、菜豆、芦笋、茭白、洋葱、黄瓜、佛手瓜、南瓜、苋菜、山苏、空心菜、龙须菜、地瓜叶、竹笋、生菜、西红柿、卷心菜、茄子。 水果：草莓、莲雾、桃、李、西瓜、菠萝、芒果、柠檬、百香果、火龙果、杏、荔枝、猕猴桃、香蕉、椰子、樱桃。
+秋季（农历七~九月） 蔬菜：秋葵、菱角、莲藕、辣椒、栗子、冬瓜、四季豆（芸豆）、地瓜叶、豆角、山药、白菜、扁豆。 水果：柚子、梨、柿子、木瓜、苹果、莲子、甘蔗、葡萄、火龙果、杨桃、番石榴、杏、橘子、红枣、山楂、核桃。
+冬季（农历十~十二月） 蔬菜：青椒、卷心菜、白菜、洋葱、花椰菜、胡萝卜、萝卜、甜豆、芹菜、菠菜、芥菜、葵年菜、莴苣。 水果：橙、橘子、柚子、青枣、甘蔗、释迦。
+吃当季当地的蔬果,自然成熟的蔬果。 吃水果要分清寒热,根据自己的体质选择。
+常见水果的性质： 温性水果：山楂、樱桃、石榴、荔枝、青果、木瓜、白果等 凉性水果：西瓜、甜瓜、梨、柑、桔、香蕉、桑椹、柿子、荸荠等。 中性水果：葡萄、苹果、桃、杏、菠萝、龙眼、甘蔗、乌梅等。 食物的温寒性 属于寒性的食物有 苦瓜、番茄、茭白、荸荠、菱肉、百合、藕、竹笋、慈姑、魔芋、空心菜、蒲公英、败酱草、鱼腥草、马齿苋、蕨菜、苦菜、荠菜、香椿、莼菜、黑鱼、鲤鱼、河蟹、泥螺、文蛤、蛏子、海蜇、海带、紫菜、田螺、河蚌、蛤蜊、牛奶、豆豉、桑葚、甘蔗、梨、西瓜、柿子、香蕉等。
+温热性食物有： 适用于风寒感冒、发热、恶寒、流涕、头痛等症象的生姜、葱白、香菜；适用于腹痛、呕吐、喜热饮等症象的干姜、红茶；适用于肢冷、畏寒、风湿性关节痛等症象的辣椒、酒等。
+平性食物有： 大米、黄豆、黑芝麻、花生、土豆、白菜、圆白菜、胡萝卜、洋葱、黑木耳、柠檬猪肉、主题、鸡蛋，鱼肉中的鲤鱼、鲫鱼、泥鳅、黄鱼、鲳鱼。另外我们日常里饮用的牛奶也属于平性食物。
+凉性食物有： 荞麦、玉米、白萝卜、冬瓜、蘑菇、芹菜、莴笋、油菜、橙子、苹果等等。
+寒性食物有： 小米、绿豆、海带、绿豆芽、苦瓜、西红柿、黄瓜、香蕉、西瓜、甜瓜等等。 食物的性是指“四性”，即寒、热、温、凉四种食性。凉性和寒性，温性和热性，在作用上有一定同性。只是在作用大小方面稍有差别。此外，有些食物其食性平和，称为平性。能减轻或消除热证的食物，属寒凉性；能减轻和消除寒证的食物属温热性。一般认为，寒凉性食物大都具有清热、泻火、解毒作用，常用于热性病证。温热性食物大多具有温中、助阳、散寒等作用，常用于寒性病证。平性食物则有健脾、开胃、补益身体的作用。
+01.樱桃成熟期在5月中旬到6月中旬； 02.露地草莓在5月中下旬开始采摘，草莓的酸甜味道才浓厚； 03.杏成熟期在5月下旬至7月中旬； 04.桃从6月中旬到10月初都有成熟的； 05.李子早熟品种6月上旬就开始上市，最好吃的品种应在8、9月间成熟; 06.枣品种的成熟期在9月中下旬到10月上旬，大枣才有枣味，在此之前上市的枣又柴又木，根本没法吃； 07.有些苹果品种入伏后就成熟，即“伏苹果”，中晚期成熟的苹果，如“红星”9月底才熟，“富士”系列到10月份才能上市； 08.梨的早熟品种8月上旬成熟，如“绿宝石”，但价钱较贵，大多数梨在9月底或10月初上市； 09.柿子一般在霜降节气，也就是10月下旬才开始上市； 10.桔子分早熟的和晚熟的,一般来说早熟的在8月就可以了,晚熟的话可以晚到11月,不过这也不是绝对的,要看你是在哪个地域,还有就是当年的气候： 11.芒果开花至果实成熟时间因气候和品种而异，一般约需110～150天，6～9月间可陆续采收： 12.柚严格来讲，柚子成熟于深秋和初冬交接的时间， 13.一般的柚品种的成熟期大多集中在11-12月份，但矮晚柚的成熟期在第二年重-2月，正值春节期间； 14.红毛丹每年2月至4月开花，6月至8月为果实成熟采摘季节； 15.菠萝蜜又称木菠萝、树菠萝，海南特产的一种热带桑科常绿乔木。果实6~7月成熟，果实巨大，最重达40公斤，被称为水果之王、热带水果皇后，果实硕大，重者有20至25千克。 16.香蕉-按其种植时期，大致有三种蕉：春种蕉，每年在&amp;quot;雨水&amp;quot;前后的2至3月份种植，8至9月份抽蕾，11至12月份成熟。秋植蕉，一般于秋分前后的9至10月间种植，次年7月份抽蕾，10月中至11月初成熟。还有夏植蕉，于6至8月份种植，次年7月初抽蕾，9月底至10月份采果。以上是正常情况，若遇异常情况，尤其是遇寒害低温，则会延期成熟； 17.桃——桃从6月中旬到10月初都有成熟的； 18.榴莲成熟时间在7·8月，榴莲从树上摘下来后，十天就可成熟； 19.核桃：每年的九月份开始是山核桃的收获季节； 20.柠檬胡成熟季节在冬季； 21.杨梅的成熟期在5-6月份，南方5-6月份又是多雨季节，所以称为梅雨； 22.珍珠番石榴种后6——8个月即可开花结果，第二年即可四季开花结果，开花期集中于4——5月和8——10月，成熟期集中于7——9月和12——1月； 23.菠萝：一般热带一年可两次收获菠萝,有冬春菠萝和夏季菠萝之分,冬春菠萝在4、5月份成熟,夏季菠萝在7月份左右才可收收获； 24.龙眼就是桂圆..桂圆是龙眼干，9月至10月上旬成熟. 25.水蜜桃:依成熟期早晚分为极早熟、早熟、中熟、晚熟、极晚熟5类。果实发育期（即开花盛期至果实成熟所需天数）在80天以内的为极早熟，80～85天的为早熟，100～120天的为中熟，120～150天的为晚熟，150天以上的为极晚熟。 特早熟水蜜桃（5月底、6月上旬成熟） 五月鲜：6月下旬成熟，尖顶圆形，缝合线深而明显，色鲜红，肉脆，汁少，味酸甜。
+大久保：7月下旬成熟，果大近圆形，底色黄绿，果顶有红晕，柔软多汁，芳香离核，味甜微酸，品质上等。
+白凤：8月上旬成熟，近圆形，果面有鲜红色条纹，皮薄易剥，果肉白中透绿，多汁粘核，味甘甜，品质上等。
+巨红水蜜桃：7月上旬成熟，大久保芽变选育而成，单果重200克，含糖量高，有清淡桃香，离皮、离核，品质上等。 魁桃：又称红蜜，7月重旬成熟，色淡黄托着鲜红，皮薄肉细，汁多而稠，甘甜如蜜，品质上等
+26.番荔枝又称佛头果一年可开花3次，开花至采收需时60~70天，以6月上旬结果最多，5月下旬所结的果最优； 27.荔枝成熟季节在5月初至6月底； 葡萄的正常成熟期是在七八月份，冬天也能吃上葡萄，．．研制了一年两熟的葡萄栽培技术，并开始大面积栽种，预计每次产量可达6万吨；
+28.枇杷秋冬开花，春末夏初果实成熟； 29.木瓜一般几时都有； 30.椰子树一年四季都开花，但椰子只在每年最热的时候成熟，椰子的特殊性情使得它对高温特别依恋，所以在热带&amp;hellip;； 31.火龙果高产，同时产果期长达6个月，分12至15批成熟火龙果从开花到果实成熟，约35天，当果实由绿色逐渐变红色，果实微香、鲜艳时，就可采收 32.无花果成熟季节在9－10月； 33.芭蕉每年2月至4月开花，6月至8月为果实成熟采摘季节； 34.人心果每年2月至4月开花，6月至8月为果实成熟采摘季节； 35.薄桃在年均温度在20度以上可开花，结果，一般盛花期3－4月，夏、秋季也有零星的花朵开放。果实于5-7月成熟。</content></entry></search>

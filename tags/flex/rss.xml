@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>flex on 靖风行</title><link>https://blog.haohome.top/tags/flex/</link><description>Recent content in flex on 靖风行</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 25 Feb 2018 20:30:54 +0000</lastBuildDate><atom:link href="https://blog.haohome.top/tags/flex/rss.xml" rel="self" type="application/rss+xml"/><item><title>flex弹性布局</title><link>https://blog.haohome.top/post/css/flex%E5%B8%83%E5%B1%80/</link><pubDate>Sun, 25 Feb 2018 20:30:54 +0000</pubDate><guid>https://blog.haohome.top/post/css/flex%E5%B8%83%E5%B1%80/</guid><description>flex布局是什么 Flex 是 Flexible Box 的缩写，意为&amp;quot;弹性布局&amp;quot;，用来为盒状模型提供最大的灵活性。 任何一个容器都可以指定为flex布局</description></item><item><title>flex-shrink 新弹性和模型属性</title><link>https://blog.haohome.top/post/css/flex-shrink-%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.haohome.top/post/css/flex-shrink-%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</guid><description>&lt;h4 id="语法">语法：&lt;/h4>
+&lt;ul>
+&lt;li>flex-shrink：&lt;number>&lt;/li>
+&lt;li>默认值：1&lt;/li>
+&lt;li>适用于：flex子项&lt;/li>
+&lt;li>继承性：无&lt;/li>
+&lt;li>动画性：是&lt;/li>
+&lt;li>计算值：指定值&lt;/li>
+&lt;/ul></description></item></channel></rss>
