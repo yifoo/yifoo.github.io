@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web/CSS on 靖风行</title><link>https://blog.haohome.top/tags/web/css/</link><description>Recent content in Web/CSS on 靖风行</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="https://blog.haohome.top/tags/web/css/rss.xml" rel="self" type="application/rss+xml"/><item><title>利用H5画随机色圆</title><link>https://blog.haohome.top/post/web/%E5%88%A9%E7%94%A8h5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</link><pubDate>Tue, 06 Mar 2018 22:42:54 +0000</pubDate><guid>https://blog.haohome.top/post/web/%E5%88%A9%E7%94%A8h5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</guid><description>忽然想到曾经遇到的一个案例： ​ 在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。 在这里用代码重现下</description></item><item><title>flex弹性布局</title><link>https://blog.haohome.top/post/web/flex%E5%B8%83%E5%B1%80/</link><pubDate>Sun, 25 Feb 2018 20:30:54 +0000</pubDate><guid>https://blog.haohome.top/post/web/flex%E5%B8%83%E5%B1%80/</guid><description>flex布局是什么 Flex 是 Flexible Box 的缩写，意为&amp;quot;弹性布局&amp;quot;，用来为盒状模型提供最大的灵活性。 任何一个容器都可以指定为flex布局</description></item><item><title>Viewport剖析</title><link>https://blog.haohome.top/post/web/viewports%E5%89%96%E6%9E%90/</link><pubDate>Tue, 20 Feb 2018 16:00:00 +0000</pubDate><guid>https://blog.haohome.top/post/web/viewports%E5%89%96%E6%9E%90/</guid><description>&lt;p>转载自W3CPlus创始人 &lt;strong>大漠&lt;/strong> 博客:
+&lt;a href="https://www.w3cplus.com/css/viewports.html" title="原文链接" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+原文链接
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>&lt;/p>
+&lt;h2 id="1-桌面pc浏览器">1. 桌面（pc）浏览器&lt;/h2>
+&lt;h3 id="11-设备的pixels和css的pixels">1.1 设备的pixels和CSS的pixels&lt;/h3>
+&lt;p>pixels决定了你工作所用的那些设备上正式的分辨率。在大多数情况下，能够从screen.width/height上取出具体值&lt;/p>
+&lt;p>如果用户缩放（zoom）了浏览器，当然必须改变计算方式。&lt;/p>
+&lt;p>现代浏览器上的缩放，是基于“伸展”pixels。结果是，html元素上的宽度并没有因为缩放200%而由128pix变成256px，而是真实的pixels的被计算成了双倍。html元素在形式上依然是128CSS的pixels，即便它占用了256设备的pixels 。&lt;/p></description></item><item><title>CSS样式----文字长度溢出显示省略号</title><link>https://blog.haohome.top/post/web/css%E6%A0%B7%E5%BC%8F---%E6%96%87%E5%AD%97%E9%95%BF%E5%BA%A6%E6%BA%A2%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7/</link><pubDate>Wed, 02 Nov 2016 22:56:24 +0000</pubDate><guid>https://blog.haohome.top/post/web/css%E6%A0%B7%E5%BC%8F---%E6%96%87%E5%AD%97%E9%95%BF%E5%BA%A6%E6%BA%A2%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7/</guid><description>text-overflow省略号样式语法结构 text-overflow语法： text-overflow : clip | ellipsis text-overflow参数值和解释： clip : 不显示省略</description></item><item><title>CSS学习记录</title><link>https://blog.haohome.top/post/web/css%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link><pubDate>Wed, 12 Oct 2016 20:46:25 +0000</pubDate><guid>https://blog.haohome.top/post/web/css%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid><description>&lt;h4 id="1上外边距的溢出">1.上外边距的溢出&lt;/h4>
+&lt;p>在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上
+特殊条件：（同时满足）
+1.父元素不能有上边框；
+2.为第一个子元素设置上外边距时
+解决方案：
+1、 为父元素增加上边框：会影响父元素的高度
+2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度
+3、 在子元素上增加一个空的&lt;table>元素即可&lt;/p></description></item></channel></rss>
