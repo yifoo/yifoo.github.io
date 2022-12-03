@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习记录 on 靖风行</title><link>https://blog.haohome.top/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link><description>Recent content in 学习记录 on 靖风行</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 14 Jan 2018 08:00:00 +0000</lastBuildDate><atom:link href="https://blog.haohome.top/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/rss.xml" rel="self" type="application/rss+xml"/><item><title>跨域资源共享CORS</title><link>https://blog.haohome.top/post/web/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-cors/</link><pubDate>Sun, 14 Jan 2018 08:00:00 +0000</pubDate><guid>https://blog.haohome.top/post/web/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-cors/</guid><description>CORS是一个W3C标准,全称是&amp;quot;跨域资源共享&amp;quot;(Cross-origin resource sharing)。它允许浏览器向夸源服务器发</description></item><item><title>CSS学习记录</title><link>https://blog.haohome.top/post/web/css%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link><pubDate>Thu, 13 Oct 2016 04:46:25 +0000</pubDate><guid>https://blog.haohome.top/post/web/css%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid><description>&lt;h4 id="1上外边距的溢出">1.上外边距的溢出&lt;/h4>
+&lt;p>在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上
+特殊条件：（同时满足）
+1.父元素不能有上边框；
+2.为第一个子元素设置上外边距时
+解决方案：
+1、 为父元素增加上边框：会影响父元素的高度
+2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度
+3、 在子元素上增加一个空的&lt;table>元素即可&lt;/p></description></item></channel></rss>
